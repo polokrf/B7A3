@@ -68,3 +68,14 @@ INSERT INTO Bookings (booking_id, user_id, match_id, seat_number, payment_status
 
 
 
+-- Query 1: Retrieve all upcoming football matches belonging to the 'Champions League' where the match status is 'Available'
+
+SELECT
+  *
+FROM
+  matches
+WHERE
+  tournament_category = 'Champions League'
+  AND match_status = 'Available'
+
+  
