@@ -75,7 +75,7 @@ SELECT
   fixture,
   base_ticket_price
 FROM
-  matches
+  Matches
 WHERE
   tournament_category = 'Champions League'
   AND match_status = 'Available'
@@ -87,7 +87,7 @@ SELECT
   full_name,
   email
 FROM
-  users
+  Users
 WHERE
   full_name ILIKE ('Tanvir%')
   OR full_name ILIKE ('%Haque%')
@@ -101,7 +101,7 @@ SELECT
   match_id,
   COALESCE(payment_status, 'Action Required') AS systematic_status
 FROM
-  bookings
+  Bookings
 WHERE
   payment_status IS NULL
 
@@ -115,9 +115,9 @@ SELECT
   fixture,
   total_cost
 FROM
-  bookings AS b
-  INNER JOIN users AS u ON b.user_id = u.user_id
-  INNER JOIN matches AS m ON b.match_id = m.match_id
+  Bookings AS b
+  INNER JOIN Users AS u ON b.user_id = u.user_id
+  INNER JOIN Matches AS m ON b.match_id = m.match_id
 
 
 -- Query 5: Display a comprehensive list of all users and their booking IDs, ensuring that fans who have never bought a ticket are still listed.
@@ -127,8 +127,8 @@ SELECT
   full_name,
   booking_id
 FROM
-  users AS u
-  LEFT JOIN bookings AS b ON b.user_id = u.user_id
+  Users AS u
+  LEFT JOIN Bookings AS b ON b.user_id = u.user_id
 
 
 -- Query 6: Find all ticket bookings where the total cost is strictly higher than the average cost of all ticket bookings.
@@ -138,13 +138,13 @@ SELECT
   match_id,
   total_cost
 FROM
-  bookings
+  Bookings
 WHERE
   total_cost > (
     SELECT
       AVG(total_cost)
     FROM
-      bookings
+      Bookings
   )
 
 
@@ -155,7 +155,7 @@ SELECT
   fixture,
   base_ticket_price
 FROM
-  matches
+  Matches
 ORDER BY
   base_ticket_price DESC
 LIMIT
